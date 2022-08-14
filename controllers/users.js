@@ -75,19 +75,21 @@ const usersPatch = (req, res) =>{
 
 
 
-const usersDelete = async (req, res) =>{
+const usersDelete = async (req, res = response) => {
     // Implemntacion de los json para devolver respuestas de la api en forma de objetos
     const {id} = req.params;
+
+    // const uid = req.uid;
 
     //! Borrado fisico de un usuario (No recomendado)
     // const usuario = await Usuario.findByIdAndDelete(id);
 
     const usuario = await Usuario.findByIdAndUpdate(id, {estado: false});
 
-    res.json({
-        usuario
-    });
+    res.json(usuario);
 }
+
+
 
 module.exports = {
     usersGet,
