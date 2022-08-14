@@ -18,9 +18,6 @@ class Server {
         //Middleware
         this.midddlewares();
 
-        //Lectura y parseo del body
-        this.app.use(express.json());
-
         //Rutas de mi aplicacion
         this.routes();
     }
@@ -32,6 +29,9 @@ class Server {
     midddlewares() {
         //CORS
         this.app.use(cors());
+
+        //Lectura y parseo del body
+        this.app.use(express.json());
 
         //Directorio publico
         this.app.use(express.static('public'));
