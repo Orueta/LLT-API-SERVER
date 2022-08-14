@@ -8,7 +8,6 @@ const { esRolValido, emailExiste, existeUsuarioPorId } = require('../helpers/dbV
 const { usersGet, 
         usersPut, 
         usersPost,
-        usersPatch,
         usersDelete} = require('../controllers/users');
 
 const router = Router();
