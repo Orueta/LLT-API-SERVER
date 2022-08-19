@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs');
 const Usuario = require('../models/usuario');
 
 
-const usersGet = async (req = request, res = response) =>{
+const usersGet = async(req = request, res = response) =>{
     //Obtenermos los query que envian desde el front pueden ser opcionales
     // const {q, nombre = 'Nom name', apikey, page = 1, limit} = req.query;
 
@@ -26,7 +26,7 @@ const usersGet = async (req = request, res = response) =>{
     });
 }
 
-const usersPut = async (req, res) =>{
+const usersPut = async(req, res) =>{
     //Obtenermos la data que nos envian desde el front
     const id = req.params.id;
     const {_id, password, google, correo, ...resto} = req.body;
@@ -44,7 +44,7 @@ const usersPut = async (req, res) =>{
     res.json(usuario);
 }
 
-const usersPost = async (req, res = response) =>{
+const usersPost = async(req, res = response) =>{
 
     const {nombre, correo, password, rol} = req.body;
     const usuario = new Usuario({nombre, correo, password, rol});
@@ -65,17 +65,7 @@ const usersPost = async (req, res = response) =>{
     });
 }
 
-const usersPatch = (req, res) =>{
-    // Implemntacion de los json para devolver respuestas de la api en forma de objetos
-    res.json({
-        ok:true,
-        msg: 'patch API - controller'
-    });
-}
-
-
-
-const usersDelete = async (req, res = response) => {
+const usersDelete = async(req, res = response) => {
     // Implemntacion de los json para devolver respuestas de la api en forma de objetos
     const {id} = req.params;
 
@@ -95,6 +85,5 @@ module.exports = {
     usersGet,
     usersPut,
     usersPost,
-    usersPatch,
     usersDelete
 }

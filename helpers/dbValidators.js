@@ -1,5 +1,10 @@
 const Role = require('../models/rol');
-const Usuario = require('../models/usuario');
+const {Usuario, Tour} = require('../models/index');
+
+/**
+ * 
+ * Validadores epecializados para Usuarios 
+ */
 
 const esRolValido  = async(rol = '') => {
 
@@ -19,7 +24,7 @@ const emailExiste = async(correo = '') => {
 
 }
 
-const existeUsuarioPorId = async (id) => {
+const existeUsuarioPorId = async(id) => {
     // Verificar si el usuario existe
     const existeUsuario = await Usuario.findById(id);
     if(!existeUsuario) {
@@ -27,8 +32,23 @@ const existeUsuarioPorId = async (id) => {
     }
 }
 
+/**
+ * 
+ * Validadores especializados para Tours
+ * 
+*/
+
+const existeTourPorId = async(id) => {
+    // Verficamos si el Tour existe
+    const existeTour = await Tour.findById(id);
+    if (!existeTour) {
+        throw new Error(`El id ${id} no existe`);
+    }
+}
+
 module.exports = {
     esRolValido,
     emailExiste,
-    existeUsuarioPorId
+    existeUsuarioPorId,
+    existeTourPorId
 }
