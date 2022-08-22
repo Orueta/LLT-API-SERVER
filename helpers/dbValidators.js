@@ -1,5 +1,5 @@
 const Role = require('../models/rol');
-const {Usuario, Tour} = require('../models/index');
+const {Usuario, Tour, Ticket} = require('../models/index');
 
 /**
  * 
@@ -46,9 +46,21 @@ const existeTourPorId = async(id) => {
     }
 }
 
+// Verficamos si el Ticket existe
+const existeTicketPorId = async( id ) => {
+
+    // Verificar si el correo existe
+    const existeTicket = await Ticket.findById(id);
+    if ( !existeTicket ) {
+        throw new Error(`El id no existe ${ id }`);
+    }
+}
+
+
 module.exports = {
     esRolValido,
     emailExiste,
     existeUsuarioPorId,
-    existeTourPorId
+    existeTourPorId,
+    existeTicketPorId
 }

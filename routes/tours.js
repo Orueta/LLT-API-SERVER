@@ -7,7 +7,7 @@ const { crearTour,
         obtenerTours,
         obtenerTour,
         actualizarTour,
-        borrarCategoria } = require('../controllers/tours');
+        borrarTour} = require('../controllers/tours');
 const { existeTourPorId } = require('../helpers/dbValidators');
 
 const router = Router();
@@ -29,6 +29,7 @@ router.get('/:id', [
 // Crear un tour - privado owner & admin
 router.post('/', [
     validarJWT,
+    tieneRole('ADMIN_ROLE', 'OWNER_ROLE'),
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     validarCampos
 ], crearTour);
@@ -49,7 +50,7 @@ router.delete('/:id', [
     check('id', 'No es id de mongo válido').isMongoId(),
     check('id').custom(existeTourPorId),
     validarCampos
-],borrarCategoria);
+],borrarTour);
 
 
 

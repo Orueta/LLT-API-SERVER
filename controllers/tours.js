@@ -1,4 +1,4 @@
-const { response } = require("express");
+const { response } = require('express');
 const {Tour} = require('../models/index');
 
 
@@ -36,6 +36,7 @@ const obtenerTour = async(req, res = response) => {
     
 }
 
+// Crear un ticket
 const crearTour = async(req, res = response) => {
     const nombre =  req.body.nombre.toUpperCase();
 
@@ -79,7 +80,7 @@ const actualizarTour = async(req, res) => {
 }
 
 // Borrar tour - estado:false
-const borrarCategoria = async(req, res =response) => {
+const borrarTour = async(req, res =response) => {
     const {id} = req.params;
     const tourBorrado = await Tour.findByIdAndUpdate(id, {estado: false}, {new:true});
     
@@ -92,5 +93,5 @@ module.exports = {
     obtenerTours,
     obtenerTour,
     actualizarTour,
-    borrarCategoria
+    borrarTour
 }

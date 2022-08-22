@@ -11,7 +11,9 @@ class Server {
 
         this.paths = {
             auth: '/api/auth',
+            search: '/api/search',
             tours: '/api/tours',
+            tickets: '/api/tickets',
             users: '/api/users',
         }
 
@@ -43,7 +45,9 @@ class Server {
     //Definimos las rutas de navegacion que tendra la aplicacion
     routes() {
         this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.search, require('../routes/search'));
         this.app.use(this.paths.tours, require('../routes/tours'));
+        this.app.use(this.paths.tickets, require('../routes/tickets'));
         this.app.use(this.paths.users, require('../routes/users'));
     }
 
