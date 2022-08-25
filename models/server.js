@@ -1,6 +1,7 @@
 // Creamos una clase para poder trabajar con el servidor de manera modular
 const express = require('express');
 const cors = require('cors'); 
+const fileUpload = require('express-fileupload');
 
 const {dbConnection} = require('../database/config');
 
@@ -10,11 +11,12 @@ class Server {
         this.port = process.env.PORT;
 
         this.paths = {
-            auth: '/api/auth',
-            search: '/api/search',
-            tours: '/api/tours',
+            auth:    '/api/auth',
+            search:  '/api/search',
+            tours:   '/api/tours',
             tickets: '/api/tickets',
-            users: '/api/users',
+            uploads: '/api/uploads',
+            users:   '/api/users',
         }
 
         //Conectar a base de datos
@@ -40,6 +42,13 @@ class Server {
 
         //Directorio publico
         this.app.use(express.static('public'));
+
+        // Fileupload - carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
     }
 
     //Definimos las rutas de navegacion que tendra la aplicacion
@@ -48,6 +57,7 @@ class Server {
         this.app.use(this.paths.search, require('../routes/search'));
         this.app.use(this.paths.tours, require('../routes/tours'));
         this.app.use(this.paths.tickets, require('../routes/tickets'));
+        this.app.use(this.paths.uploads, require('../routes/uploads'));
         this.app.use(this.paths.users, require('../routes/users'));
     }
 

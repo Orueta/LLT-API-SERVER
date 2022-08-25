@@ -24,7 +24,7 @@ const TourSchema = Schema({
         type: String,
     },
     // actividades: {}, 
-    imagen: {
+    img: {
         type: String
     },
 });
